@@ -1,0 +1,38 @@
+.card {
+  display: flex;
+  padding: 10px;
+  margin-top: 9px;
+  border-bottom: 1px solid rgb(196, 196, 196);
+}
+
+.info {
+  margin-left: 30px;
+}
+.img {
+  height: 500px;
+}
+
+.genre {
+  margin-right: 9px;
+}
+
+.infoContainer {
+  padding: 10px;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  width: 170px;
+  margin-left: 10px;
+  padding: 5px;
+  border: 1px solid rgb(78, 78, 78);
+  border-radius: 6px;
+  background-color: rgb(236, 236, 236);
+}
+
+.infoList {
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgb(196, 196, 196);
+}

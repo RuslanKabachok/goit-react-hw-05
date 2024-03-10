@@ -17,13 +17,4 @@ export default async function fetchMovies(url) {
   } catch (error) {
     console.log(error);
   }
-
-  // const response = axios
-  //   .get(url, options)
-  //   .then((response) => console.log(response))
-  //   .catch((err) => console.error(err));
-
-  // return response;
 }
-
-//'https://api.themoviedb.org/3/trending/movie/day?language=en-US'

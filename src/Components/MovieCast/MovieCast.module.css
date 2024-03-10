@@ -1,0 +1,10 @@
+.item {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.img {
+  width: 150px;
+  margin: 8px 0;
+}
