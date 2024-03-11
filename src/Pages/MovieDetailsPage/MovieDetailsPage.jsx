@@ -1,5 +1,5 @@
 import { NavLink, useParams, Outlet, useLocation } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
 import { BiArrowBack } from 'react-icons/bi';
 import fetchMovies from '../../Components/api';
 import css from '../MovieDetailsPage/MovieDetailsPage.module.css';
@@ -62,7 +62,9 @@ function MovieDetailsPage() {
             <NavLink to="reviews">Reviews</NavLink>
           </li>
         </ul>
-        <Outlet />
+        <Suspense fallback={<div>Loading subcomponent...</div>}>
+          <Outlet />
+        </Suspense>
       </div>
     </div>
   );

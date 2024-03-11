@@ -1,25 +1,32 @@
 import { Routes, Route } from 'react-router-dom';
-import Navigation from '../../Components/Navigation/Navigation';
-import HomePage from '../../Pages/HomePage/HomePage';
-import MoviesPage from '../../Pages/MoviesPage/MoviesPage';
-import NotFoundPage from '../../Pages/NotFoundPage/NotFoundPage';
-import MovieDetailsPage from '../../Pages/MovieDetailsPage/MovieDetailsPage';
-import MovieCast from '../MovieCast/MovieCast';
-import MovieReviews from '../MovieReviews/MovieReviews';
+import { lazy, Suspense } from 'react';
+const Navigation = lazy(() => import('../../Components/Navigation/Navigation'));
+const HomePage = lazy(() => import('../../Pages/HomePage/HomePage'));
+const MoviesPage = lazy(() => import('../../Pages/MoviesPage/MoviesPage'));
+const NotFoundPage = lazy(() =>
+  import('../../Pages/NotFoundPage/NotFoundPage')
+);
+const MovieDetailsPage = lazy(() =>
+  import('../../Pages/MovieDetailsPage/MovieDetailsPage')
+);
+const MovieCast = lazy(() => import('../MovieCast/MovieCast'));
+const MovieReviews = lazy(() => import('../MovieReviews/MovieReviews'));
 
 function App() {
   return (
     <>
       <Navigation />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/movies" element={<MoviesPage />} />
-        <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
-          <Route path="cast" element={<MovieCast />}></Route>
-          <Route path="reviews" element={<MovieReviews />}></Route>
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Suspense fallback={<div>Loading page...</div>}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+            <Route path="cast" element={<MovieCast />}></Route>
+            <Route path="reviews" element={<MovieReviews />}></Route>
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }
