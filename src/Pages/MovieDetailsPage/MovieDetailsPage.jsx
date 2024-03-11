@@ -1,5 +1,5 @@
-import { NavLink, useParams, Outlet } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { NavLink, useParams, Outlet, useLocation } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
 import { BiArrowBack } from 'react-icons/bi';
 import fetchMovies from '../../Components/api';
 import css from '../MovieDetailsPage/MovieDetailsPage.module.css';
@@ -9,6 +9,8 @@ function MovieDetailsPage() {
   const moviesByIdUrl = `https://api.themoviedb.org/3/movie/${movieId}`;
 
   const [movie, setMovie] = useState(null);
+  const location = useLocation();
+  const backLinkRef = useRef(location.state || '/');
 
   useEffect(() => {
     async function getMoviesById() {
@@ -24,9 +26,9 @@ function MovieDetailsPage() {
 
   return (
     <div>
-      <NavLink to="/" className={css.backLink}>
+      <NavLink to={backLinkRef.current} className={css.backLink}>
         <BiArrowBack />
-        Back to home page
+        Go back
       </NavLink>
       <div className={css.card}>
         <img
