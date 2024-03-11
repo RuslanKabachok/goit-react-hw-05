@@ -9,52 +9,45 @@ function MoviesPage() {
   const [params, setParams] = useSearchParams();
   const value = params.get('query') ?? '';
 
-  // useEffect(() => {
-  //   async function getSearchedMovies() {
-  //     try {
-  //       const searchMoviesUrl = `https://api.themoviedb.org/3/search/movie?query=${query}`;
-  //       const response = await fetchMovies(searchMoviesUrl);
-  //       setMovies(response.results);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   if (query) {
-  //     getSearchedMovies();
-  //   }
-  // }, [query, setParams]);
+  const movieQuery = `https://api.themoviedb.org/3/search/movie?query=${query}include_adult=false&language=en-US&page=1`;
 
-  // async function getSearchedMovies(e) {
-  //   try {
-  //     const searchMoviesUrl = `https://api.themoviedb.org/3/search/movie?query=${value}`;
-  //     e.preventDefault();
-  //     const response = await fetchMovies(searchMoviesUrl);
-  //     setMovies(response.results);
-  //     setParams({ query: '' });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  useEffect(() => {
+    async function searchMovies() {
+      try {
+        const response = await fetchMovies(movieQuery);
+        setMovies(response.results);
+        console.log(response.results);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    searchMovies();
+  }, [movieQuery]);
 
-  const handleChange = (newValue) => {
-    params.set('query', newValue);
-    setQuery(newValue);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setQuery(e.target.query.value);
+    setParams({ query: e.target.query.value });
   };
 
   return (
     <div>
-      <form>
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
         <input
           type="text"
           name="query"
           value={value}
-          onChange={(e) => handleChange(e.target.value)}
+          onChange={(e) => setParams({ query: e.target.value })}
         />
         <button type="submit">Search</button>
       </form>
 
       <ul>
-        <MovieList data={movies} />
+        <MovieList data={movies || []} />
       </ul>
     </div>
   );
