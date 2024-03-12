@@ -27,7 +27,6 @@ function MoviesPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setQuery(e.target.query.value);
-    setParams({ query: e.target.query.value });
   };
 
   return (
