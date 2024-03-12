@@ -9,7 +9,7 @@ function MoviesPage() {
   const [params, setParams] = useSearchParams();
   const value = params.get('query') ?? '';
 
-  const movieQuery = `https://api.themoviedb.org/3/search/movie?query=${query}include_adult=false&language=en-US&page=1`;
+  const movieQuery = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
 
   useEffect(() => {
     async function searchMovies() {
