@@ -9,7 +9,7 @@ function MoviesPage() {
   const [params, setParams] = useSearchParams();
   const value = params.get('query') ?? '';
 
-  const movieQuery = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
+  const movieQuery = `https://api.themoviedb.org/3/search/movie?query=${value}&include_adult=false&language=en-US&page=1`;
 
   useEffect(() => {
     async function searchMovies() {
@@ -26,7 +26,7 @@ function MoviesPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setQuery(e.target.query.value);
+    setParams({ query: e.target.query.value });
   };
 
   return (
@@ -39,8 +39,8 @@ function MoviesPage() {
         <input
           type="text"
           name="query"
-          value={value}
-          onChange={(e) => setParams({ query: e.target.value })}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
         />
         <button type="submit">Search</button>
       </form>
